@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+
+.hover-orange {
+    @apply bg-gradient-to-br;
+}
+.hover-orange:hover {
+    @apply hover:text-white hover:from-nforange hover:to-nforange-light;
+}
+
+
+@tailwind utilities;

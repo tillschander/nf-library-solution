@@ -1,0 +1,16 @@
+{
+  "name": "nf-library-templates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.html",
+  "scripts": {
+    "build": "tailwindcss-cli build ./tailwind.css -o ./dist/styles.css",
+    "prod": "NODE_ENV=production npm run build"
+  },
+  "author": "Till Schander",
+  "license": "",
+  "dependencies": {},
+  "devDependencies": {
+    "tailwindcss-cli": "^0.1.2"
+  }
+}
