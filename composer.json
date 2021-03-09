@@ -1,0 +1,23 @@
+{
+    "name": "till/nf-library-solution",
+    "description": "A library homepage",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Till Schander",
+            "email": "tillschander@neuefische.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "filp/whoops": "^2.9",
+        "symfony/http-foundation": "^5.2",
+        "symfony/routing": "^5.2",
+        "twig/twig": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
