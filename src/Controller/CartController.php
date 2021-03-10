@@ -8,7 +8,16 @@ class CartController extends AbstractController
 {
     public function show(): Response
     {
-        return $this->render('cart/show.html.twig');
+        return $this->render('cart/show.html.twig', [
+            'items' => []
+        ]);
+    }
+
+    public function borrow(): Response
+    {
+        return new Response('', 301, [
+            'Location' => '/cart/success'
+        ]);
     }
 
     public function success(): Response

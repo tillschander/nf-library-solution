@@ -26,6 +26,7 @@ class Kernel
         try {
             $routes = include __DIR__ . '/../config/routes.php';
             $context = RequestContext::fromUri($request->getUri());
+            $context->setMethod($request->getMethod());
             $matcher = new UrlMatcher($routes, $context);
             $match = $matcher->match($request->getPathInfo());
             $controllerClass = $match['_controller'][0];
