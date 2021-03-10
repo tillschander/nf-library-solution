@@ -86,14 +86,14 @@ abstract class Item
         $this->artist = $artist;
     }
 
-    public function getReleaseDate(): DateTime
+    public function getReleaseDate(): string
     {
-        return $this->releaseDate;
+        return date_format($this->releaseDate, 'l jS F Y');
     }
 
-    public function setReleaseDate(DateTime $releaseDate): void
+    public function setReleaseDate(string $releaseDate): void
     {
-        $this->releaseDate = $releaseDate;
+        $this->releaseDate = new DateTime($releaseDate);
     }
 
     public function getCategory(): Category
@@ -110,7 +110,7 @@ abstract class Item
     {
         if($this instanceof Book) return 'book';
         if($this instanceof Record) return 'record';
-        if($this instanceof Movie) return 'video';
+        if($this instanceof Movie) return 'movie';
         return 'item';
     }
 }

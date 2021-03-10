@@ -111,7 +111,7 @@ foreach ($bookData as $data) {
     $book = new Book;
     $book->setName($data['name']);
     $book->setArtist($data['artist']);
-    $book->setReleaseDate(new DateTime($data['releaseDate']));
+    $book->setReleaseDate($data['releaseDate']);
     $book->setCoverUrl($data['coverUrl']);
     $book->setIsbn($data['isbn']);
     $book->setCategory($books);
@@ -195,7 +195,7 @@ foreach ($movieData as $data) {
     $movie = new Movie;
     $movie->setName($data['name']);
     $movie->setArtist($data['artist']);
-    $movie->setReleaseDate(new DateTime($data['releaseDate']));
+    $movie->setReleaseDate($data['releaseDate']);
     $movie->setCoverUrl($data['coverUrl']);
     $movie->setDuration($data['duration']);
     $movie->setCategory($movies);
@@ -287,7 +287,7 @@ foreach ($audioData as $data) {
     $record = new Record;
     $record->setName($data['name']);
     $record->setArtist($data['artist']);
-    $record->setReleaseDate(new DateTime($data['releaseDate']));
+    $record->setReleaseDate($data['releaseDate']);
     $record->setCoverUrl($data['coverUrl']);
     $record->setLabel($data['label']);
     $record->setCategory($audio);

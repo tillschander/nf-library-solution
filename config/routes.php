@@ -18,7 +18,7 @@ function route(string $verb, string $path, string $controller, string $method): 
 $routes = new Routing\RouteCollection();
 $routes->add('home.show', route('GET', '/', HomeController::class, 'show'));
 $routes->add('category.show', route('GET', '/categories/{slug}', CategoryController::class, 'show'));
-$routes->add('item.show', route('GET', '/items/{item}', ItemController::class, 'show'));
+$routes->add('item.show', route('GET', '/items/{id}', ItemController::class, 'show'));
 $routes->add('cart.show', route('GET', '/cart', CartController::class, 'show'));
 $routes->add('cart.success', route('GET', '/cart/success', CartController::class, 'success'));
 

@@ -4,7 +4,7 @@
     </h3>
     <div class="mt-4 grid gap-4 grid-cols-5">
         {% for item in items %}
-        <a href="/{{ item.type }}/{{ item.id }}"
+        <a href="/items/{{ item.id }}"
             class="flex flex-col items-center text-center bg-white shadow rounded-lg p-4 hover-orange group">
             <img class="h-48 block rounded-lg"
                 src="{{ item.coverUrl }}" />
