@@ -14,12 +14,12 @@ class Book extends Item
      */
     protected $isbn;
 
-    public function getIsbn()
+    public function getIsbn(): int
     {
         return $this->isbn;
     }
 
-    public function setIsbn($isbn)
+    public function setIsbn(int $isbn): void
     {
         $this->isbn = $isbn;
     }

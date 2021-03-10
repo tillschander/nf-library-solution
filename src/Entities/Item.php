@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
     
 /**
@@ -50,62 +51,62 @@ abstract class Item
     */
     protected $category;
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    public function getCoverUrl()
+    public function getCoverUrl(): string
     {
         return $this->coverUrl;
     }
 
-    public function setCoverUrl($coverUrl)
+    public function setCoverUrl(string $coverUrl): void
     {
         $this->coverUrl = $coverUrl;
     }
 
-    public function getArtist()
+    public function getArtist(): string
     {
         return $this->artist;
     }
 
-    public function setArtist($artist)
+    public function setArtist(string $artist): void
     {
         $this->artist = $artist;
     }
 
-    public function getReleaseDate()
+    public function getReleaseDate(): DateTime
     {
         return $this->releaseDate;
     }
 
-    public function setReleaseDate($releaseDate)
+    public function setReleaseDate(DateTime $releaseDate): void
     {
         $this->releaseDate = $releaseDate;
     }
 
-    public function getCategory()
+    public function getCategory(): Category
     {
         return $this->category;
     }
 
-    public function setCategory($category)
+    public function setCategory(Category $category): void
     {
         $this->category = $category;
     }
 
-    public function getType()
+    public function getType(): string
     {
         if($this instanceof Book) return 'book';
         if($this instanceof Record) return 'record';

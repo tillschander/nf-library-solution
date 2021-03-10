@@ -10,16 +10,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Record extends Item
 {
     /**
-     * @ORM\Column(type="integer", nullable=TRUE)
+     * @ORM\Column(type="string", nullable=TRUE)
      */
     protected $label;
 
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
 
-    public function setLabel($label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }

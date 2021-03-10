@@ -14,12 +14,12 @@ class Movie extends Item
      */
     protected $duration;
 
-    public function getDuration()
+    public function getDuration(): string
     {
         return $this->duration;
     }
 
-    public function setDuration($duration)
+    public function setDuration(string $duration): void
     {
         $this->duration = $duration;
     }
