@@ -3,37 +3,17 @@
         All categories
     </h3>
     <dl class="mt-4 grid gap-5 grid-cols-3 text-white">
-        <a href="/categories/books" class="shadow bg-gradient-to-br from-nfblue to-nfblue-light rounded-lg hover-orange">
+        {% for category in categories %}
+        <a href="/categories/{{ category.slug }}" class="shadow bg-gradient-to-br from-nfblue to-nfblue-light rounded-lg hover-orange">
             <div class="p-6">
                 <dt class="text-sm">
-                    More than 2000+
+                    {{ category.description }}
                 </dt>
                 <dd class="mt-1 text-3xl font-semibold">
-                    Books
+                    {{ category.name }}
                 </dd>
             </div>
         </a>
-
-        <a href="/categories/movies" class="shadow bg-gradient-to-br from-nfblue to-nfblue-light rounded-lg hover-orange">
-            <div class="p-6">
-                <dt class="text-sm">
-                    New and popular
-                </dt>
-                <dd class="mt-1 text-3xl font-semibold">
-                    Movies
-                </dd>
-            </div>
-        </a>
-
-        <a href="/categories/music" class="shadow bg-gradient-to-br from-nfblue to-nfblue-light rounded-lg hover-orange">
-            <div class="p-6">
-                <dt class="text-sm">
-                    The hottest
-                </dt>
-                <dd class="mt-1 text-3xl font-semibold">
-                    Music
-                </dd>
-            </div>
-        </a>
+        {% endfor %}
     </dl>
 </section>
