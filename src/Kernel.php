@@ -11,14 +11,12 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class Kernel
 {
-    private function getControllerMethodArguments(array $match): array
+    private function getControllerMethodArguments(string $controllerClass, string $methodName, array $match): array
     {
-        $controllerClass = $match['_controller'][0];
-        $methodName = $match['_controller'][1];
         $reflectionMethod = new ReflectionMethod($controllerClass, $methodName);
 
         return array_map(
-            fn($parameter) => $match[$parameter->getName()],
+            fn ($parameter) => $match[$parameter->getName()],
             $reflectionMethod->getParameters()
         );
     }
@@ -30,9 +28,10 @@ class Kernel
             $context = RequestContext::fromUri($request->getUri());
             $matcher = new UrlMatcher($routes, $context);
             $match = $matcher->match($request->getPathInfo());
-            $controller = new $match['_controller'][0];
+            $controllerClass = $match['_controller'][0];
             $methodName = $match['_controller'][1];
-            $arguments = $this->getControllerMethodArguments($match);
+            $controller = new $controllerClass;
+            $arguments = $this->getControllerMethodArguments($controllerClass, $methodName, $match);
 
             return call_user_func_array([$controller, $methodName], $arguments);
         } catch (ResourceNotFoundException $exception) {
