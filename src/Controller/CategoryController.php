@@ -4,27 +4,19 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use App\Entities\Category;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-
-require_once __DIR__ . '/../../bootstrap.php';
+use Doctrine\ORM\EntityManager;
 
 class CategoryController extends AbstractController
 {
-    public function show(string $slug): Response
+    public function show(string $slug, EntityManager $em): Response
     {
-        $entityManager = getEntityManager();
+        $category = $em->getRepository(Category::class)->findOneBy(['slug' => $slug]);   
 
-        $category = $entityManager
-            ->getRepository(Category::class)
-            ->findOneBy(['slug' => $slug]);
-
-        if (!isset($category)) {
-            throw new ResourceNotFoundException('Category not found!');
-        }
-   
-        return $this->render('category/show.html.twig', [
-            'name' => $category->getName(),
-            'items' => $category->getItems()
-        ]);
+        return !isset($category)
+            ? $this->notFound('Category not found')
+            : $this->render('category/show.html.twig', [
+                'name' => $category->getName(),
+                'items' => $category->getItems()
+            ]);
     }
 }

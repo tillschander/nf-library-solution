@@ -1,25 +1,16 @@
 <?php
 
-use Symfony\Component\Routing;
 use App\Controller\HomeController;
 use App\Controller\CategoryController;
 use App\Controller\ItemController;
 use App\Controller\CartController;
-use Symfony\Component\Routing\Route;
 
-function route(string $verb, string $path, string $controller, string $method): Route
-{
-    return new Route($path, [
-        '_controller' => [$controller, $method]
-    ], [], [], null, ['http', 'https'], [$verb]);
-}
-
-$routes = new Routing\RouteCollection();
-$routes->add('home.show', route('GET', '/', HomeController::class, 'show'));
-$routes->add('category.show', route('GET', '/categories/{slug}', CategoryController::class, 'show'));
-$routes->add('item.show', route('GET', '/items/{id}', ItemController::class, 'show'));
-$routes->add('cart.borrow', route('POST', '/cart', CartController::class, 'borrow'));
-$routes->add('cart.show', route('GET', '/cart', CartController::class, 'show'));
-$routes->add('cart.success', route('GET', '/cart/success', CartController::class, 'success'));
-
-return $routes;
+return [
+    ['GET', '/', [HomeController::class, 'show']],
+    ['GET', '/categories/{slug}', [CategoryController::class, 'show']],
+    ['GET', '/items/{id}', [ItemController::class, 'show']],
+    ['POST', '/cart/{id}', [CartController::class, 'add']],
+    ['POST', '/borrow', [CartController::class, 'borrow']],
+    ['GET', '/cart', [CartController::class, 'show']],
+    ['GET', '/cart/success', [CartController::class, 'success']],
+];

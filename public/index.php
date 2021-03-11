@@ -3,20 +3,11 @@
 use App\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $isDevMode = true;
 
-// Error reporting
-if (!$isDevMode) {
-    error_reporting(E_ALL);
-    $whoops = new \Whoops\Run;
-    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-    $whoops->register();
-}
-
-// Request/Response handling
-$kernel = new Kernel();
+$kernel = new Kernel($isDevMode);
 $request = Request::createFromGlobals();
-$response = $kernel->handle($request, !$isDevMode);
+$response = $kernel->handle($request);
 $response->send();

@@ -4,24 +4,16 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use App\Entities\Item;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-
-require_once __DIR__ . '/../../bootstrap.php';
+use Doctrine\ORM\EntityManager;
 
 class ItemController extends AbstractController
 {
-    public function show(string $id): Response
+    public function show(string $id, EntityManager $em): Response
     {
-        $entityManager = getEntityManager();
+        $item = $em->getRepository(Item::class)->find($id);
 
-        $item = $entityManager->getRepository(Item::class)->find($id);
-
-        if (!isset($item)) {
-            throw new ResourceNotFoundException('Item not found!');
-        }
-
-        return $this->render('item/show.html.twig', [
-            'item' => $item
-        ]);
+        return !isset($item)
+            ? $this->notFound('Item not found')
+            : $this->render('item/show.html.twig', ['item' => $item]);
     }
 }

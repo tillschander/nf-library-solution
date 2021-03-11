@@ -4,11 +4,16 @@ use App\Entities\Book;
 use App\Entities\Movie;
 use App\Entities\Record;
 use App\Entities\Category;
+use Doctrine\ORM\EntityManager;
+use DI\ContainerBuilder;
 
-require_once "bootstrap.php";
+require_once __DIR__ . '/vendor/autoload.php';
 
-$entityManager = getEntityManager();
-
+// Init Entity Manager
+$containerBuilder = new ContainerBuilder;
+$containerBuilder->addDefinitions(__DIR__ . '/config/services.php');
+$container = $containerBuilder->build();
+$entityManager = $container->get(EntityManager::class);
 
 // Books Category
 $books = $entityManager->getRepository(Category::class)->findOneBy(['slug' => 'books']);

@@ -3,29 +3,49 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Twig;
+use Twig\Environment;
+use Doctrine\ORM\EntityManager;
 
 abstract class AbstractController
 {
-    protected function render(string $view, array $parameters = []): Response
-    {
-        $loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../../templates');
-        $twig = new Twig\Environment($loader, [
-            'cache' => __DIR__ . '/../../var/templates',
-            'auto_reload' => true
-        ]);
-        $content = $twig->render($view, $parameters);
+    protected Environment $twig;
+    protected Response $response;
 
-        return new Response($content);
+    public function __construct(Response $response, Environment $twig)
+    {
+        $this->response = $response;
+        $this->twig = $twig;
     }
 
-    protected function json($data): Response
+    protected function render(string $view, array $parameters = []): Response
     {
-        $json = json_encode($data);
-        $headers = [
-            'Content-Type' => 'application/json'
-        ];
+        $html = $this->twig->render($view, $parameters);
+        $this->response->setContent($html);
 
-        return new Response($json, 200, $headers);
+        return $this->response;
+    }
+
+    protected function json(mixed $data): Response
+    {
+        $this->response->headers->set('Content-Type', 'application/json');
+        $this->response->setContent(json_encode($data));
+
+        return $this->response;
+    }
+
+    protected function notFound(string $message = 'Not found'): Response
+    {
+        $this->response->setStatusCode(404);
+        $this->response->setContent($message);
+
+        return $this->response;
+    }
+
+    protected function redirect(string $url): Response
+    {
+        $this->response->headers->set('Location', $url);
+        $this->response->setStatusCode(302);
+
+        return $this->response;
     }
 }
