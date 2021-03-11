@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
-use Doctrine\ORM\EntityManager;
 
 abstract class AbstractController
 {
     protected Environment $twig;
     protected Response $response;
 
-    public function __construct(Response $response, Environment $twig)
+    public function __construct(Request $request, Response $response, Environment $twig)
     {
+        $this->request = $request;
         $this->response = $response;
         $this->twig = $twig;
     }
