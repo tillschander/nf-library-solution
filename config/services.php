@@ -28,7 +28,7 @@ return [
     Environment::class => function () {
         $loader = new FilesystemLoader(__DIR__ . '/../templates');
         return new Environment($loader, [
-            'cache' => __DIR__ . '/../var/templates',
+            'cache' => __DIR__ . '/../var/cache',
             'auto_reload' => true
         ]);
     },
