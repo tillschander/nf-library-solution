@@ -8,8 +8,9 @@ use Twig\Environment;
 
 abstract class AbstractController
 {
-    protected Environment $twig;
+    protected Request $request;
     protected Response $response;
+    protected Environment $twig;
 
     public function __construct(Request $request, Response $response, Environment $twig)
     {
